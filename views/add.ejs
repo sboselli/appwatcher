@@ -1,0 +1,101 @@
+<div class="container">
+    <div id="add" class="box c90">
+            <h1>Quick Add</h1>
+
+            <form action="/add" id="form-add" method="post">
+                <fieldset>
+                    <legend></legend>
+
+                    <div class="fl">
+                        <label for="name">Group/Device Name</label>
+                        <input type="hidden" name="groupname" value="">
+                        <select id="form-add-groupname" class="form-add-groupname" name="groupid" onchange="groupSelected(this)">
+                          <% for(var i=0; i < groups.length; i++) { %>
+                          <option value="<%= groups[i]._id %>"><%= groups[i].name %></option>
+                          <% }; %>
+                        </select>
+                    </div>
+
+                    <div class="fl">
+                        <label for="freq">Freq</label>
+                        <select name="freq">
+                          <option value="1">1</option>
+                          <option value="5">5</option>
+                          <option value="15" selected="selected">15</option>
+                          <option value="30">30</option>
+                          <option value="60">60</option>
+                        </select>
+                    </div>
+
+                    <div class="fl">
+                        <label for="type">Type</label>
+                        <select name="type" onchange="typeSelected(this)">
+                          <option value="icmp">ICMP</option>
+                          <option value="http">http</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="options-icmp fl">
+                        <label for="ip">IP Address</label>
+                        <input type="text" name="ip" class="form-add-ip" />
+                    </div>
+                    <div class="options-http fl">
+                        <div>
+                            <label for="url">URL</label>
+                            <input type="text" name="url" class="form-add-url" />
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="options-http">
+                        <label>Matching Options</label>
+                        <p>Example:<br>
+                        .poweredBy &nbsp;&nbsp;&nbsp; text &nbsp;&nbsp;&nbsp; == &nbsp;&nbsp;&nbsp; 'Powered by'<br><br>
+                        Will result in:<br>
+                        $('.poweredBy').text() == 'Powered by';
+                        </p>
+                        <div class="fl">
+                            <label for="selector">Selector</label>
+                            <input type="text" name="selector" class="form-add-selector" placeholder="#id / .class-name" />
+                        </div>
+                        <div class="fl">
+                            <label for="getter">Getter</label>
+                            <input type="text" name="getter" class="form-add-getter" placeholder="text / val" />
+                        </div>
+                        <div class="fl">
+                            <label for="operator">Operator</label>
+                            <input type="text" name="operator" class="form-add-operator" placeholder="== / ===" />
+                        </div>
+                        <div>
+                            <label for="expected">Expected value</label>
+                            <input type="text" name="expected" class="form-add-expected" placeholder="string to match" />
+                        </div>
+                    </div>
+                    <input id="submit" class="submit bl" name="submit" type="submit" value="Submit" />
+                </fieldset>
+            </form>
+    </div>
+</div>
+<!--
+    /**
+     * [icmp Check devices using ICMP ]
+     * @param  {String} name [Watcher name]
+     * @param  {String} ip   [IP address of device to check]
+     * @param  {Int}    freq [Polling frequency in seconds]
+     */
+
+    /**
+     * [http Check HTTP service]
+     * @param  {String} name      [Watcher name]
+     * @param  {String} url       [Url of http service to check]
+     * @param  {Object} matchData [Matching options object. Example: {
+     *                              selector: '.powered',   // Any valid JQuery selector
+     *                              getter: 'text',         // 'text' or 'val'
+     *                              operator: '==',         // '==' or '==='
+     *                              expected: 'Powered by'
+     *                            }]
+     * @param  {Int}    freq      [Polling frequency in seconds]
+     */
+
+-->
