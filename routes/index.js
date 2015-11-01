@@ -60,7 +60,15 @@ router.post('/add', function(req, res, next) {
   });
 
 });
-
+router.get('/deleteWatcher/:id', function(req, res, next) {
+  W.deleteWatcher(req.params.id, function(err, numRemoved) {
+    if (!err) {
+      res.redirect('/');
+    } else {
+      res.send(err);
+    }
+  });
+});
 router.get('/addgroup', function(req, res, next) {
   res.render('layout', {
     body: 'addgroup',
