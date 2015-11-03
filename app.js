@@ -16,6 +16,7 @@ var Datastore = require('nedb');
 var app = express();
 
 // Globals
+global.active = [];
 global.status = [];
 global.flags = {};
 global.counters = {};
