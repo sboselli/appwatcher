@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var W = require('../lib/appwatcher.js');
 var moment = require('moment');
+var isIP = require('isipaddress');
 
 // Status
 router.get('*', function(req, res, next) {
@@ -54,6 +55,11 @@ router.post('/add', function(req, res, next) {
   };
 
   if (type == 'icmp') {
+    if (!isIP.test(req.body.ip)) {
+      res.send(err);
+      next();
+      return false;
+    }
     watcher.ip = req.body.ip;
   }
   if (type == 'http') {
@@ -65,6 +71,7 @@ router.post('/add', function(req, res, next) {
       expected: req.body.expected
     }
   }
+  watcher.disabled = false;
 
   W.addWatcher(watcher, function(err, newDoc) {
     if (!err) {

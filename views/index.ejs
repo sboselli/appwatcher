@@ -25,6 +25,9 @@
           <% if (status[i].watchers[w].type == 'http') { %>
           <div class="box-service box-http">
             <div class="box-service-functions">
+              <a href="/stopWatcher/<%= status[i].watchers[w].watcher %>">
+                <i class="fa fa-stop" title="Stop"></i>
+              </a>
               <a href="/editWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-pencil" title="Edit"></i>
               </a>
@@ -47,6 +50,9 @@
           <% if (status[i].watchers[w].type == 'icmp') { %>
           <div class="box-service box-icmp">
             <div class="box-service-functions">
+              <a href="/stopWatcher/<%= status[i].watchers[w].watcher %>">
+                <i class="fa fa-stop" title="Stop"></i>
+              </a>
               <a href="/editWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-pencil" title="Edit"></i>
               </a>
@@ -54,7 +60,7 @@
                 <i class="fa fa-times-circle" title="Delete"></i>
               </a>
             </div>
-            <div class="box-status fl <% if (status[i].watchers[w].result.status) { %>status_up<% } %>">ICMP</div>
+            <div class="box-status fl <% if (status[i].watchers[w].result.status) { %>status_up<% } %>"><%= status[i].watchers[w].result.ip %></div>
             <!-- <div class=""><%= status[i].watchers[w].result.ip %></div> -->
             <div class="last-poll">
               <!-- • ♦ ∴ :: ♠ -->
@@ -73,6 +79,6 @@
 (function() {
   setInterval(function() {
       window.location.reload();
-  }, 15000);
+  }, 30000);
 })();
 </script>
