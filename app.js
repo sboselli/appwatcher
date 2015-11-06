@@ -16,8 +16,7 @@ var Datastore = require('nedb');
 var app = express();
 
 // Globals
-global.active = [];
-global.status = [];
+global.lastPoll = [];
 global.flags = {};
 global.counters = {};
 global.debug = true;
@@ -27,6 +26,7 @@ global.dbs = {};
 dbs.users = new Datastore({ filename: 'db/users.db', autoload: true });
 dbs.groups = new Datastore({ filename: 'db/groups.db', autoload: true });
 dbs.watchers = new Datastore({ filename: 'db/watchers.db', autoload: true });
+dbs.wlog = new Datastore({ filename: 'db/wlog.db', autoload: true });
 
 // Passport
 passport.serializeUser(function(user, done) {

@@ -3,6 +3,7 @@
   <% for (var i = 0; i < status.length; i++) { %>
     <div class="row box-device">
 
+    <!-- group -->
       <div class="three columns">
         <div class="title">
           <%= status[i].group %>&nbsp;
@@ -17,21 +18,27 @@
         </div>
       </div>
 
+      <!-- watchers -->
       <div class="nine columns">
         <!-- http -->
         <% for (var w = 0; w < status[i].watchers.length; w++) { %>
           <% if (status[i].watchers[w].type == 'http') { %>
           <div class="box-service box-http">
             <div class="box-service-functions">
-              <a href="/editWatcher/<%= status[i].watchers[w]._id %>">
+              <a href="/editWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-pencil" title="Edit"></i>
               </a>
-              <a href="/deleteWatcher/<%= status[i].watchers[w]._id %>">
+              <a href="/deleteWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-times-circle" title="Delete"></i>
               </a>
             </div>
-            <div class="box-status fl <% if (status[i].watchers[w].status) { %>status_up<% } %>">HTTP</div>
-            <div class=""><%= status[i].watchers[w].url %></div>
+            <div class="box-status fl <% if (status[i].watchers[w].result.status) { %>status_up<% } %>">HTTP</div>
+            <!-- <div class=""><%= status[i].watchers[w].result.url %></div> -->
+            <div class="last-poll">
+              <!-- • ♦ ∴ :: ♠ -->
+              Last poll: <%= moment(status[i].watchers[w].dateRun).format('MMM D YYYY, h:mm:ss a') %> &nbsp;•&nbsp;
+              Uptime: 3 days ( since <%= moment(status[i].watchers[w].dateRun).format('MMM D YYYY') %> ) <!-- &nbsp;•&nbsp; -->
+            </div>
           </div>
           <% } %>
         <% } %>
@@ -40,15 +47,20 @@
           <% if (status[i].watchers[w].type == 'icmp') { %>
           <div class="box-service box-icmp">
             <div class="box-service-functions">
-              <a href="/editWatcher/<%= status[i].watchers[w]._id %>">
+              <a href="/editWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-pencil" title="Edit"></i>
               </a>
-              <a href="/deleteWatcher/<%= status[i].watchers[w]._id %>">
+              <a href="/deleteWatcher/<%= status[i].watchers[w].watcher %>">
                 <i class="fa fa-times-circle" title="Delete"></i>
               </a>
             </div>
-            <div class="box-status fl <% if (status[i].watchers[w].status) { %>status_up<% } %>">ICMP</div>
-            <div class=""><%= status[i].watchers[w].ip %></div>
+            <div class="box-status fl <% if (status[i].watchers[w].result.status) { %>status_up<% } %>">ICMP</div>
+            <!-- <div class=""><%= status[i].watchers[w].result.ip %></div> -->
+            <div class="last-poll">
+              <!-- • ♦ ∴ :: ♠ -->
+              Last poll: <%= moment(status[i].watchers[w].dateRun).format('MMM D YYYY, h:mm:ss a') %> &nbsp;•&nbsp;
+              Uptime: 3 days ( since <%= moment(status[i].watchers[w].dateRun).format('MMM D YYYY') %> )<!-- &nbsp;•&nbsp; -->
+            </div>
           </div>
           <% } %>
         <% } %>
